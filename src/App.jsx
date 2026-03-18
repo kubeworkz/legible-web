@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Logos from './components/Logos';
@@ -9,6 +10,8 @@ import Proof from './components/Proof';
 import CtaBanner from './components/CtaBanner';
 import Footer from './components/Footer';
 import WaitlistModal from './components/WaitlistModal';
+import BlogList from './components/BlogList';
+import BlogPost from './components/BlogPost';
 import { fetchAPI } from './lib/strapi';
 
 // Set up the global reveal observer once the app mounts.
@@ -88,6 +91,7 @@ function useCmsData() {
 export default function App() {
   useGlobalReveal();
   const { cms, ready } = useCmsData();
+  const location = useLocation();
 
   // modal: null | { mode: 'free' | 'demo', plan?: string }
   const [modal, setModal] = useState(null);
@@ -100,16 +104,33 @@ export default function App() {
 
   const closeModal = () => setModal(null);
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  const isBlog = location.pathname.startsWith('/blog');
+
   return (
     <div className={ready ? 'cms-ready' : 'cms-loading'}>
-      <Navbar onCTAClick={openModal} cms={cms.navbar} />
-      <Hero onCTAClick={openModal} cms={cms.hero} />
-      <Logos cms={cms.databases} />
-      <HowItWorks cms={cms.steps} />
-      <Features cms={cms.features} />
-      <Pricing onCTAClick={openModal} cms={cms.plans} />
-      <Proof cms={cms.testimonials} />
-      <CtaBanner onCTAClick={openModal} cms={cms.ctaBanner} />
+      <Navbar onCTAClick={openModal} cms={cms.navbar} isBlog={isBlog} />
+
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Hero onCTAClick={openModal} cms={cms.hero} />
+            <Logos cms={cms.databases} />
+            <HowItWorks cms={cms.steps} />
+            <Features cms={cms.features} />
+            <Pricing onCTAClick={openModal} cms={cms.plans} />
+            <Proof cms={cms.testimonials} />
+            <CtaBanner onCTAClick={openModal} cms={cms.ctaBanner} />
+          </>
+        } />
+        <Route path="/blog" element={<BlogList />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+      </Routes>
+
       <Footer cms={cms.footer} />
 
       {modal && (

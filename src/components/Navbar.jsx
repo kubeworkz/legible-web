@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const DEFAULT_LINKS = [
   { label: 'How it works', href: '#how' },
@@ -7,7 +8,7 @@ const DEFAULT_LINKS = [
   { label: 'Customers', href: '#proof' },
 ];
 
-export default function Navbar({ onCTAClick, cms }) {
+export default function Navbar({ onCTAClick, cms, isBlog }) {
   const logoText = cms?.logoText ?? 'Legible';
   const links = cms?.links ?? DEFAULT_LINKS;
   const ctaLabel = cms?.ctaLabel ?? 'Start free →';
@@ -15,6 +16,7 @@ export default function Navbar({ onCTAClick, cms }) {
   const [active, setActive] = useState('');
 
   useEffect(() => {
+    if (isBlog) return;
     const sections = document.querySelectorAll('section[id]');
     const handler = () => {
       let current = '';
@@ -25,16 +27,16 @@ export default function Navbar({ onCTAClick, cms }) {
     };
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
-  }, []);
+  }, [isBlog]);
 
   return (
     <nav>
-      <a className="nav-logo" href="#">
+      <Link className="nav-logo" to="/">
         <span className="nav-logo-dot"></span>
         {logoText}
-      </a>
+      </Link>
       <ul className="nav-links">
-        {links.map(({ href, label }) => (
+        {!isBlog && links.map(({ href, label }) => (
           <li key={href}>
             <a
               href={href}
@@ -44,6 +46,9 @@ export default function Navbar({ onCTAClick, cms }) {
             </a>
           </li>
         ))}
+        <li>
+          <Link to="/blog" style={{ color: isBlog ? 'var(--teal)' : '' }}>Blog</Link>
+        </li>
       </ul>
       <button className="nav-cta" onClick={() => onCTAClick('nav')}>
         {ctaLabel}
