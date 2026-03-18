@@ -1216,3 +1216,14 @@
       letter-spacing: 0.06em;
       margin-top: 4px;
     }
+
+    /* ── CMS LOADING STATE ── */
+    .cms-loading {
+      opacity: 0.92;
+      transition: opacity 0.3s ease;
+    }
+
+    .cms-ready {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }

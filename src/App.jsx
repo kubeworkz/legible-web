@@ -42,6 +42,7 @@ function useGlobalReveal() {
 // Fetch all CMS data in parallel; returns null values on failure (components use defaults)
 function useCmsData() {
   const [cms, setCms] = useState({});
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const endpoints = {
@@ -56,11 +57,17 @@ function useCmsData() {
       databases:  '/supported-databases?sort=sortOrder:asc',
     };
 
+    const timeout = setTimeout(() => {
+      // If CMS hasn't responded in 3s, show defaults without waiting
+      if (!ready) setReady(true);
+    }, 3000);
+
     Promise.allSettled(
       Object.entries(endpoints).map(([key, path]) =>
         fetchAPI(path).then((data) => [key, data])
       )
     ).then((results) => {
+      clearTimeout(timeout);
       const data = {};
       for (const result of results) {
         if (result.status === 'fulfilled') {
@@ -69,15 +76,18 @@ function useCmsData() {
         }
       }
       setCms(data);
+      setReady(true);
     });
+
+    return () => clearTimeout(timeout);
   }, []);
 
-  return cms;
+  return { cms, ready };
 }
 
 export default function App() {
   useGlobalReveal();
-  const cms = useCmsData();
+  const { cms, ready } = useCmsData();
 
   // modal: null | { mode: 'free' | 'demo', plan?: string }
   const [modal, setModal] = useState(null);
@@ -91,7 +101,7 @@ export default function App() {
   const closeModal = () => setModal(null);
 
   return (
-    <>
+    <div className={ready ? 'cms-ready' : 'cms-loading'}>
       <Navbar onCTAClick={openModal} cms={cms.navbar} />
       <Hero onCTAClick={openModal} cms={cms.hero} />
       <Logos cms={cms.databases} />
@@ -109,6 +119,6 @@ export default function App() {
           onClose={closeModal}
         />
       )}
-    </>
+    </div>
   );
 }
