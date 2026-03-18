@@ -1,28 +1,26 @@
 import { useReveal } from '../hooks/useReveal';
 
-const STEPS = [
-  {
-    num: '01',
-    icon: '🔌',
-    title: 'Connect your database',
-    body: 'Add a connection string for MySQL, PostgreSQL, ClickHouse, or Oracle. Legible queries in place — your data never moves.',
-  },
-  {
-    num: '02',
-    icon: '💬',
-    title: 'Ask in plain English',
-    body: 'Type any business question. Legible understands your schema, relationships, and context to generate accurate SQL — automatically.',
-  },
-  {
-    num: '03',
-    icon: '✓',
-    title: 'Get verified answers',
-    body: 'See the generated SQL alongside the results. Every query is validated before execution. Full transparency, always.',
-  },
+const DEFAULT_STEPS = [
+  { num: '01', icon: '🔌', title: 'Connect your database', body: 'Add a connection string for MySQL, PostgreSQL, ClickHouse, or Oracle. Legible queries in place — your data never moves.' },
+  { num: '02', icon: '💬', title: 'Ask in plain English', body: 'Type any business question. Legible understands your schema, relationships, and context to generate accurate SQL — automatically.' },
+  { num: '03', icon: '✓', title: 'Get verified answers', body: 'See the generated SQL alongside the results. Every query is validated before execution. Full transparency, always.' },
 ];
 
-export default function HowItWorks() {
+function toSteps(cmsSteps) {
+  if (!cmsSteps) return DEFAULT_STEPS;
+  return cmsSteps
+    .sort((a, b) => a.stepNumber - b.stepNumber)
+    .map((s, i) => ({
+      num: String(s.stepNumber).padStart(2, '0'),
+      icon: s.icon,
+      title: s.title,
+      body: s.description,
+    }));
+}
+
+export default function HowItWorks({ cms }) {
   const ref = useReveal();
+  const steps = toSteps(cms);
 
   return (
     <section id="how">
@@ -33,7 +31,7 @@ export default function HowItWorks() {
       </div>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 48px' }}>
         <div className="steps-grid" data-reveal ref={ref}>
-          {STEPS.map(({ num, icon, title, body }) => (
+          {steps.map(({ num, icon, title, body }) => (
             <div className="step" key={num}>
               <div className="step-num">{num}</div>
               <div className="step-icon">{icon}</div>

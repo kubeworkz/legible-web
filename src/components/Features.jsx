@@ -1,4 +1,4 @@
-const FEATURES = [
+const DEFAULT_FEATURES = [
   { icon: '🔍', title: 'Full SQL Transparency', body: 'Every answer comes with the exact SQL query that produced it. No black boxes. Verify, edit, or export any query.' },
   { icon: '🎯', title: 'Schema-Aware Queries', body: 'Legible learns your table structure, relationships, and naming conventions — so queries match your actual data model.' },
   { icon: '🛡️', title: 'Data Stays in Place', body: 'Your data never leaves your infrastructure. Legible connects and queries directly — no copies, no warehousing required.' },
@@ -7,7 +7,16 @@ const FEATURES = [
   { icon: '💳', title: 'Usage-Based Pricing', body: 'Pay for what you use. No seat licenses, no enterprise negotiations. Scales from a 2-person data team to hundreds of users.' },
 ];
 
-export default function Features() {
+function toFeatures(cmsFeatures) {
+  if (!cmsFeatures) return DEFAULT_FEATURES;
+  return cmsFeatures
+    .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
+    .map((f) => ({ icon: f.icon, title: f.title, body: f.description }));
+}
+
+export default function Features({ cms }) {
+  const features = toFeatures(cms);
+
   return (
     <section id="features">
       <div className="features-inner">
@@ -23,7 +32,7 @@ export default function Features() {
           </div>
         </div>
         <div className="features-grid">
-          {FEATURES.map(({ icon, title, body }) => (
+          {features.map(({ icon, title, body }) => (
             <div className="feature-card" data-reveal key={title}>
               <span className="feature-icon">{icon}</span>
               <h4>{title}</h4>

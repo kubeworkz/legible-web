@@ -1,15 +1,28 @@
-const LINKS = ['Product', 'Docs', 'Pricing', 'Blog', 'Careers', 'Privacy'];
+const DEFAULT_LINKS = [
+  { label: 'Product', href: '#' },
+  { label: 'Docs', href: '#' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Blog', href: '#' },
+  { label: 'Careers', href: '#' },
+  { label: 'Privacy', href: '#' },
+];
 
-export default function Footer() {
+export default function Footer({ cms }) {
+  const logoText = cms?.logoText ?? 'Legible';
+  const links = cms?.links ?? DEFAULT_LINKS;
+  const copyright = cms?.copyright ?? '© 2026 Legible Inc. All rights reserved.';
+
   return (
     <footer>
-      <div className="footer-logo">Legible</div>
+      <div className="footer-logo">{logoText}</div>
       <div className="footer-links">
-        {LINKS.map((l) => (
-          <a href="#" key={l}>{l}</a>
-        ))}
+        {links.map((l) => {
+          const label = typeof l === 'string' ? l : l.label;
+          const href = typeof l === 'string' ? '#' : (l.href ?? '#');
+          return <a href={href} key={label}>{label}</a>;
+        })}
       </div>
-      <div className="footer-copy">© 2026 Legible Inc. All rights reserved.</div>
+      <div className="footer-copy">{copyright}</div>
     </footer>
   );
 }

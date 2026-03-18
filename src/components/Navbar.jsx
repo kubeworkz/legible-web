@@ -1,6 +1,17 @@
 import { useEffect, useState } from 'react';
 
-export default function Navbar({ onCTAClick }) {
+const DEFAULT_LINKS = [
+  { label: 'How it works', href: '#how' },
+  { label: 'Features', href: '#features' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Customers', href: '#proof' },
+];
+
+export default function Navbar({ onCTAClick, cms }) {
+  const logoText = cms?.logoText ?? 'Legible';
+  const links = cms?.links ?? DEFAULT_LINKS;
+  const ctaLabel = cms?.ctaLabel ?? 'Start free →';
+
   const [active, setActive] = useState('');
 
   useEffect(() => {
@@ -20,10 +31,10 @@ export default function Navbar({ onCTAClick }) {
     <nav>
       <a className="nav-logo" href="#">
         <span className="nav-logo-dot"></span>
-        Legible
+        {logoText}
       </a>
       <ul className="nav-links">
-        {[['#how', 'How it works'], ['#features', 'Features'], ['#pricing', 'Pricing'], ['#proof', 'Customers']].map(([href, label]) => (
+        {links.map(({ href, label }) => (
           <li key={href}>
             <a
               href={href}
@@ -35,7 +46,7 @@ export default function Navbar({ onCTAClick }) {
         ))}
       </ul>
       <button className="nav-cta" onClick={() => onCTAClick('nav')}>
-        Start free →
+        {ctaLabel}
       </button>
     </nav>
   );

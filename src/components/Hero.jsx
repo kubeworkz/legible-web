@@ -1,36 +1,56 @@
-export default function Hero({ onCTAClick }) {
+const DEFAULT_STATS = [
+  { num: '4+', label: 'databases supported' },
+  { num: '<2s', label: 'avg. query time' },
+  { num: '100%', label: 'SQL transparent' },
+];
+
+export default function Hero({ onCTAClick, cms }) {
+  const eyebrow = cms?.eyebrow ?? 'Generative Business Intelligence';
+  const title = cms?.title ?? 'Your data. Plain language. Accurate answers.';
+  const titleHighlight = cms?.titleHighlight ?? 'Accurate answers.';
+  const subtitle = cms?.subtitle ?? "Legible connects to your databases and turns natural language questions into verified SQL — instantly. Built for data teams who can't afford to be wrong.";
+  const primaryCta = cms?.primaryCtaLabel ?? 'Start for free';
+  const secondaryCta = cms?.secondaryCtaLabel ?? 'See how it works';
+  const stats = cms?.stats ?? DEFAULT_STATS;
+
+  // Split title into parts: everything before the highlight, and the highlight itself
+  const highlightIndex = title.indexOf(titleHighlight);
+  const titleBefore = highlightIndex > 0 ? title.slice(0, highlightIndex) : title;
+
   return (
     <section id="hero">
       <div className="hero-left">
         <div className="hero-eyebrow fade-up">
           <span className="hero-eyebrow-dot"></span>
-          Generative Business Intelligence
+          {eyebrow}
         </div>
         <h1 className="hero-title fade-up">
-          Your data.<br />
-          <span>Plain language.</span><br />
-          Accurate answers.
+          {titleBefore.split('. ').filter(Boolean).map((part, i, arr) => (
+            <span key={i}>{part}{i < arr.length - 1 ? '.' : ''}<br /></span>
+          ))}
+          {titleHighlight && highlightIndex >= 0 && (
+            <span>{titleHighlight}</span>
+          )}
         </h1>
-        <p className="hero-sub fade-up">
-          Legible connects to your databases and turns natural language questions into verified SQL — instantly. Built for data teams who can't afford to be wrong.
-        </p>
+        <p className="hero-sub fade-up">{subtitle}</p>
         <div className="hero-actions fade-up">
           <button className="btn-primary" onClick={() => onCTAClick('hero-free')}>
-            Start for free
+            {primaryCta}
           </button>
-          <a href="#how" className="btn-ghost">See how it works</a>
+          <a href="#how" className="btn-ghost">{secondaryCta}</a>
         </div>
         <div className="stats-row fade-up">
-          {[
-            { num: '4+', label: 'databases supported' },
-            { num: '<2s', label: 'avg. query time' },
-            { num: '100%', label: 'SQL transparent' },
-          ].map(({ num, label }) => (
-            <div className="stat" key={label}>
-              <div className="stat-num">{num}</div>
-              <div className="stat-label">{label}</div>
-            </div>
-          ))}
+          {stats.map(({ num, label, icon, text }) => {
+            // Support both formats: {num, label} from hardcoded and {icon, text} from CMS
+            const displayNum = num ?? icon ?? '';
+            const displayLabel = label ?? text ?? '';
+            return (
+              <div className="stat" key={displayLabel}>
+                <div className="stat-num">{displayNum}</div>
+                <div className="stat-label">{displayLabel}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
 

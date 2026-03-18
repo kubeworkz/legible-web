@@ -9,6 +9,7 @@ import Proof from './components/Proof';
 import CtaBanner from './components/CtaBanner';
 import Footer from './components/Footer';
 import WaitlistModal from './components/WaitlistModal';
+import { fetchAPI } from './lib/strapi';
 
 // Set up the global reveal observer once the app mounts.
 function useGlobalReveal() {
@@ -38,8 +39,45 @@ function useGlobalReveal() {
   }, []);
 }
 
+// Fetch all CMS data in parallel; returns null values on failure (components use defaults)
+function useCmsData() {
+  const [cms, setCms] = useState({});
+
+  useEffect(() => {
+    const endpoints = {
+      hero:       '/hero',
+      navbar:     '/navbar',
+      ctaBanner:  '/cta-banner',
+      footer:     '/footer',
+      steps:      '/how-it-works-steps?sort=stepNumber:asc',
+      features:   '/features?sort=sortOrder:asc',
+      plans:      '/pricing-plans?sort=sortOrder:asc',
+      testimonials: '/testimonials?sort=sortOrder:asc',
+      databases:  '/supported-databases?sort=sortOrder:asc',
+    };
+
+    Promise.allSettled(
+      Object.entries(endpoints).map(([key, path]) =>
+        fetchAPI(path).then((data) => [key, data])
+      )
+    ).then((results) => {
+      const data = {};
+      for (const result of results) {
+        if (result.status === 'fulfilled') {
+          const [key, value] = result.value;
+          data[key] = value;
+        }
+      }
+      setCms(data);
+    });
+  }, []);
+
+  return cms;
+}
+
 export default function App() {
   useGlobalReveal();
+  const cms = useCmsData();
 
   // modal: null | { mode: 'free' | 'demo', plan?: string }
   const [modal, setModal] = useState(null);
@@ -54,15 +92,15 @@ export default function App() {
 
   return (
     <>
-      <Navbar onCTAClick={openModal} />
-      <Hero onCTAClick={openModal} />
-      <Logos />
-      <HowItWorks />
-      <Features />
-      <Pricing onCTAClick={openModal} />
-      <Proof />
-      <CtaBanner onCTAClick={openModal} />
-      <Footer />
+      <Navbar onCTAClick={openModal} cms={cms.navbar} />
+      <Hero onCTAClick={openModal} cms={cms.hero} />
+      <Logos cms={cms.databases} />
+      <HowItWorks cms={cms.steps} />
+      <Features cms={cms.features} />
+      <Pricing onCTAClick={openModal} cms={cms.plans} />
+      <Proof cms={cms.testimonials} />
+      <CtaBanner onCTAClick={openModal} cms={cms.ctaBanner} />
+      <Footer cms={cms.footer} />
 
       {modal && (
         <WaitlistModal
