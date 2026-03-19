@@ -15,7 +15,7 @@ import BlogPost from './components/BlogPost';
 import { fetchAPI } from './lib/strapi';
 
 // Set up the global reveal observer once the app mounts.
-function useGlobalReveal() {
+function useGlobalReveal(...deps) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -32,14 +32,14 @@ function useGlobalReveal() {
 
     // Small timeout so all components have rendered
     const t = setTimeout(() => {
-      document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+      document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => observer.observe(el));
     }, 50);
 
     return () => {
       clearTimeout(t);
       observer.disconnect();
     };
-  }, []);
+  }, deps);
 }
 
 // Fetch all CMS data in parallel; returns null values on failure (components use defaults)
@@ -89,9 +89,9 @@ function useCmsData() {
 }
 
 export default function App() {
-  useGlobalReveal();
   const { cms, ready } = useCmsData();
   const location = useLocation();
+  useGlobalReveal(ready, location.pathname);
 
   // modal: null | { mode: 'free' | 'demo', plan?: string }
   const [modal, setModal] = useState(null);
