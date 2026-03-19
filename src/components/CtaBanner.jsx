@@ -22,9 +22,6 @@ export default function CtaBanner({ onCTAClick, cms }) {
         <button className="btn-primary" onClick={() => onCTAClick('free')}>
           {primaryCta}
         </button>
-        <button className="btn-ghost" onClick={() => onCTAClick('demo')}>
-          {secondaryCta}
-        </button>
       </div>
     </section>
   );

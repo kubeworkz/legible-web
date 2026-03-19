@@ -7,7 +7,7 @@ const DEFAULT_STEPS = [
 ];
 
 function toSteps(cmsSteps) {
-  if (!cmsSteps) return DEFAULT_STEPS;
+  if (!cmsSteps?.length) return DEFAULT_STEPS;
   return cmsSteps
     .sort((a, b) => a.stepNumber - b.stepNumber)
     .map((s, i) => ({

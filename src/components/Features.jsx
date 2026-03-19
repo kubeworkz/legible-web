@@ -8,7 +8,7 @@ const DEFAULT_FEATURES = [
 ];
 
 function toFeatures(cmsFeatures) {
-  if (!cmsFeatures) return DEFAULT_FEATURES;
+  if (!cmsFeatures?.length) return DEFAULT_FEATURES;
   return cmsFeatures
     .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
     .map((f) => ({ icon: f.icon, title: f.title, body: f.description }));

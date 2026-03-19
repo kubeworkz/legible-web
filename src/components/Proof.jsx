@@ -9,7 +9,7 @@ function getInitials(name) {
 }
 
 function toTestimonials(cmsItems) {
-  if (!cmsItems) return DEFAULT_TESTIMONIALS;
+  if (!cmsItems?.length) return DEFAULT_TESTIMONIALS;
   return cmsItems
     .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
     .map((t) => ({

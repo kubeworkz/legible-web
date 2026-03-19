@@ -20,7 +20,7 @@ const DEFAULT_PLANS = [
 ];
 
 function toPlans(cmsPlans) {
-  if (!cmsPlans) return DEFAULT_PLANS;
+  if (!cmsPlans?.length) return DEFAULT_PLANS;
   return cmsPlans
     .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
     .map((p) => ({

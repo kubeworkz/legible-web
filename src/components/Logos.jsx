@@ -1,7 +1,7 @@
-const DEFAULT_DBS = ['PostgreSQL', 'MySQL', 'ClickHouse', 'Oracle'];
+const DEFAULT_DBS = ['PostgreSQL', 'MySQL', 'ClickHouse', 'Oracle', 'DuckDB', 'Snowflake', 'BigQuery', 'Redshift', 'Databricks', 'SQL Server', 'Trino', 'Athena (Trino)'];
 
 export default function Logos({ cms }) {
-  const databases = cms ?? DEFAULT_DBS;
+  const databases = cms?.length ? cms : DEFAULT_DBS;
 
   return (
     <div id="logos">
