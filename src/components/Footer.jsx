@@ -3,7 +3,8 @@ const DEFAULT_LINKS = [
   { label: 'Docs', href: 'https://docs.legiblequery.ai' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Privacy', href: '#' },
+  { label: 'Privacy', href: '/privacy' },
+  { label: 'Terms', href: '/terms' },
 ];
 
 export default function Footer({ cms }) {

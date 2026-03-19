@@ -12,6 +12,8 @@ import Footer from './components/Footer';
 import WaitlistModal from './components/WaitlistModal';
 import BlogList from './components/BlogList';
 import BlogPost from './components/BlogPost';
+import Privacy from './components/Privacy';
+import Terms from './components/Terms';
 import { fetchAPI } from './lib/strapi';
 
 // Set up the global reveal observer once the app mounts.
@@ -131,6 +133,8 @@ export default function App() {
         } />
         <Route path="/blog" element={<BlogList />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
 
       <Footer cms={cms.footer} />
