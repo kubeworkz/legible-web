@@ -6,7 +6,7 @@ const DEFAULT_STATS = [
 
 export default function Hero({ onCTAClick, cms }) {
   const eyebrow = cms?.eyebrow ?? 'Natural Language Data Intelligence';
-  const title = cms?.title ?? 'Ask your data anything. Get answers you can trust.';
+  const title = cms?.title ?? 'Ask your data anything.\nGet answers you can trust.';
   const titleHighlight = cms?.titleHighlight ?? 'answers you can trust.';
   const subtitle = cms?.subtitle ?? "Legible turns plain English into verified SQL across your databases — no guesswork, no black boxes. Built for teams where accuracy isn't optional.";
   const primaryCta = cms?.primaryCtaLabel ?? 'Start for free';
@@ -25,8 +25,8 @@ export default function Hero({ onCTAClick, cms }) {
           {eyebrow}
         </div>
         <h1 className="hero-title fade-up">
-          {titleBefore.split('. ').filter(Boolean).map((part, i, arr) => (
-            <span key={i}>{part}{i < arr.length - 1 ? '.' : ''}<br /></span>
+          {titleBefore.split('\n').filter(Boolean).map((part, i, arr) => (
+            <span key={i} className="hero-title-line">{part}{i < arr.length - 1 ? <br /> : ' '}</span>
           ))}
           {titleHighlight && highlightIndex >= 0 && (
             <span>{titleHighlight}</span>
