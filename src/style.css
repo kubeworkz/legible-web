@@ -1615,9 +1615,9 @@
     }
 
     .cookie-btn.accept {
-      background: var(--accent);
-      color: #000;
-      border: none;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
     }
 
     .cookie-btn.decline {
