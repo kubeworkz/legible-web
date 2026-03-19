@@ -49,6 +49,9 @@ export default function Navbar({ onCTAClick, cms, isBlog }) {
         <li>
           <Link to="/blog" style={{ color: isBlog ? 'var(--teal)' : '' }}>Blog</Link>
         </li>
+        <li>
+          <a href="https://docs.legiblequery.ai" target="_blank" rel="noopener noreferrer">Docs</a>
+        </li>
       </ul>
       <button className="nav-cta" onClick={() => onCTAClick('nav')}>
         {ctaLabel}
