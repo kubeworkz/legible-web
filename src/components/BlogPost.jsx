@@ -81,6 +81,16 @@ export default function BlogPost() {
       .finally(() => setLoading(false));
   }, [slug]);
 
+  const cover = post?.coverImage?.url;
+  const category = post?.category?.name;
+
+  useHead({
+    title: post ? post.title : 'Loading…',
+    description: post ? (post.excerpt || `${post.title} — Legible Blog`) : '',
+    image: cover ? strapiMediaURL(cover) : undefined,
+    url: `/blog/${slug}`,
+  });
+
   if (loading) return <div className="blog-page"><div className="blog-loading">Loading…</div></div>;
   if (notFound) return (
     <div className="blog-page">
@@ -90,16 +100,6 @@ export default function BlogPost() {
       </div>
     </div>
   );
-
-  const cover = post.coverImage?.url;
-  const category = post.category?.name;
-
-  useHead({
-    title: post.title,
-    description: post.excerpt || `${post.title} — Legible Blog`,
-    image: cover ? strapiMediaURL(cover) : undefined,
-    url: `/blog/${post.slug}`,
-  });
 
   return (
     <div className="blog-page">
