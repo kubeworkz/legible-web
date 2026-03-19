@@ -1,7 +1,7 @@
 import { useReveal } from '../hooks/useReveal';
 
 const DEFAULT_STEPS = [
-  { num: '01', icon: '🔌', title: 'Connect your database', body: 'Add a connection string for MySQL, PostgreSQL, ClickHouse, or Oracle. Legible queries in place — your data never moves.' },
+  { num: '01', icon: '🔌', title: 'Connect your database', body: 'Add an MCP connection to any of our supported databases. Legible queries in place — your data never moves.' },
   { num: '02', icon: '💬', title: 'Ask in plain English', body: 'Type any business question. Legible understands your schema, relationships, and context to generate accurate SQL — automatically.' },
   { num: '03', icon: '✓', title: 'Get verified answers', body: 'See the generated SQL alongside the results. Every query is validated before execution. Full transparency, always.' },
 ];

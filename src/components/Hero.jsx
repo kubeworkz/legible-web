@@ -1,5 +1,5 @@
 const DEFAULT_STATS = [
-  { num: '4+', label: 'databases supported' },
+  { num: '12', label: 'databases supported' },
   { num: '<2s', label: 'avg. query time' },
   { num: '100%', label: 'SQL transparent' },
 ];

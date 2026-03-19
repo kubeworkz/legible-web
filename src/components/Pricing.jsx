@@ -1,21 +1,16 @@
 const DEFAULT_PLANS = [
   {
-    tier: 'Starter', price: 'Free', priceSub: '',
-    desc: 'For individuals and small teams getting started',
-    features: ['500 queries / month', '2 database connections', 'Full SQL transparency', 'Query history (30 days)', 'Community support'],
-    cta: 'Get started free', ctaType: 'free', ctaStyle: 'outline', featured: false,
+    tier: 'Fully Open Source', price: 'Free', priceSub: '',
+    desc: 'For individuals, teams and enterprises getting familiar with Legible. Stay tuned for our self-hosted LLM offering coming soon.',
+    features: ['All database connections', 'All features', 'Full audit trail', 'SSO + RBAC', 'Community support'],
+    cta: 'Get started free', ctaType: 'free', ctaStyle: 'outline', featured: false, ctaLink: 'https://github.com/kubeworkz/legible',
   },
   {
-    tier: 'Growth', price: '$0.02', priceSub: ' / query',
-    desc: 'For growing data teams that need more power',
-    features: ['Unlimited queries', '10 database connections', 'Multi-source queries', 'Full audit trail', 'Team workspaces', 'Priority support'],
-    cta: 'Start free trial', ctaType: 'free', ctaStyle: 'solid', featured: true, badge: 'Most popular',
-  },
-  {
-    tier: 'Enterprise', price: 'Custom', priceSub: '',
-    desc: 'For larger teams with advanced security and compliance needs',
-    features: ['Volume discounts', 'Unlimited connections', 'SSO + RBAC', 'Custom data retention', 'SLA + dedicated support', 'On-premise option'],
-    cta: 'Talk to sales', ctaType: 'demo', ctaStyle: 'outline', featured: false,
+    tier: 'Legible Cloud', price: '$0.02', priceSub: ' / query',
+    descHighlight: '25 FREE queries per month.',
+    desc: 'For growing data teams who need reliability and support without the overhead of managing infrastructure',
+    features: ['Unlimited queries', 'All database connections', 'Multi-source queries', 'All features'],
+    cta: 'Start free', ctaType: 'free', ctaStyle: 'solid', featured: true, badge: 'Most popular',
   },
 ];
 
@@ -56,16 +51,27 @@ export default function Pricing({ onCTAClick, cms }) {
               {plan.price}
               {plan.priceSub && <sub>{plan.priceSub}</sub>}
             </div>
-            <p className="pricing-desc">{plan.desc}</p>
+            <p className="pricing-desc">{plan.descHighlight && <><strong>{plan.descHighlight}</strong>{' '}</>}{plan.desc}</p>
             <ul className="pricing-features">
               {plan.features.map((f) => <li key={f}>{f}</li>)}
             </ul>
-            <button
-              className={`pricing-cta ${plan.ctaStyle}`}
-              onClick={() => onCTAClick(plan.ctaType === 'demo' ? 'demo' : 'free', plan.tier)}
-            >
-              {plan.cta}
-            </button>
+            {plan.ctaLink ? (
+              <a
+                className={`pricing-cta ${plan.ctaStyle}`}
+                href={plan.ctaLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {plan.cta}
+              </a>
+            ) : (
+              <button
+                className={`pricing-cta ${plan.ctaStyle}`}
+                onClick={() => onCTAClick(plan.ctaType === 'demo' ? 'demo' : 'free', plan.tier)}
+              >
+                {plan.cta}
+              </button>
+            )}
           </div>
         ))}
       </div>

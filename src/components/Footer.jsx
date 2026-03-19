@@ -1,9 +1,8 @@
 const DEFAULT_LINKS = [
   { label: 'Product', href: '#' },
-  { label: 'Docs', href: '#' },
+  { label: 'Docs', href: 'https://docs.legiblequery.ai' },
   { label: 'Pricing', href: '#pricing' },
-  { label: 'Blog', href: '#' },
-  { label: 'Careers', href: '#' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Privacy', href: '#' },
 ];
 

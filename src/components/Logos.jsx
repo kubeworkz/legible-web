@@ -10,7 +10,7 @@ export default function Logos({ cms }) {
         const name = typeof db === 'string' ? db : db.name;
         return <span className="db-chip" key={name}>{name}</span>;
       })}
-      <span className="db-chip">+ many more...</span>
+      <span className="db-chip">+ more to come...</span>
     </div>
   );
 }
