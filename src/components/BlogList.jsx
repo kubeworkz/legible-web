@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchAPI, strapiMediaURL } from '../lib/strapi';
+import useHead from '../hooks/useHead';
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
@@ -13,8 +14,14 @@ export default function BlogList() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  useHead({
+    title: 'Blog',
+    description: 'Thoughts on data, AI, and building tools for teams that value accuracy.',
+    url: '/blog',
+  });
+
   useEffect(() => {
-    fetchAPI('/blog-posts?populate=coverImage,category&sort=publishedAt:desc')
+    fetchAPI('/blog-posts?populate=*&sort=publishedAt:desc')
       .then((data) => setPosts(data || []))
       .catch(() => {})
       .finally(() => setLoading(false));

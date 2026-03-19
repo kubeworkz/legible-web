@@ -97,9 +97,11 @@ export default function App() {
   const [modal, setModal] = useState(null);
 
   const openModal = (type, plan) => {
-    // 'demo' stays demo; everything else is 'free'
-    const mode = type === 'demo' ? 'demo' : 'free';
-    setModal({ mode, plan });
+    if (type !== 'demo') {
+      window.location.href = 'https://legible.legiblequery.ai';
+      return;
+    }
+    setModal({ mode: 'demo', plan });
   };
 
   const closeModal = () => setModal(null);

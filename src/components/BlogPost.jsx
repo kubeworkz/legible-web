@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchAPI, strapiMediaURL } from '../lib/strapi';
+import useHead from '../hooks/useHead';
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
@@ -68,7 +69,7 @@ export default function BlogPost() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    fetchAPI(`/blog-posts?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=coverImage,category`)
+    fetchAPI(`/blog-posts?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`)
       .then((data) => {
         if (data && data.length > 0) {
           setPost(data[0]);
@@ -92,6 +93,13 @@ export default function BlogPost() {
 
   const cover = post.coverImage?.url;
   const category = post.category?.name;
+
+  useHead({
+    title: post.title,
+    description: post.excerpt || `${post.title} — Legible Blog`,
+    image: cover ? strapiMediaURL(cover) : undefined,
+    url: `/blog/${post.slug}`,
+  });
 
   return (
     <div className="blog-page">
