@@ -14,6 +14,7 @@ import BlogList from './components/BlogList';
 import BlogPost from './components/BlogPost';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
+import CookieConsent from './components/CookieConsent';
 import { fetchAPI } from './lib/strapi';
 
 // Set up the global reveal observer once the app mounts.
@@ -138,6 +139,8 @@ export default function App() {
       </Routes>
 
       <Footer cms={cms.footer} />
+
+      <CookieConsent />
 
       {modal && (
         <WaitlistModal
