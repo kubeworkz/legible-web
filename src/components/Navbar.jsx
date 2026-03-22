@@ -50,6 +50,9 @@ export default function Navbar({ onCTAClick, cms, isBlog }) {
           <Link to="/blog" style={{ color: isBlog ? 'var(--teal)' : '' }}>Blog</Link>
         </li>
         <li>
+          <a href="/legible-security.html">On-Premise</a>
+        </li>
+        <li>
           <a href="https://docs.legiblequery.ai" target="_blank" rel="noopener noreferrer">Docs</a>
         </li>
       </ul>
