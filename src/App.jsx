@@ -14,6 +14,7 @@ import BlogList from './components/BlogList';
 import BlogPost from './components/BlogPost';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
+import Contact from './components/Contact';
 import CookieConsent from './components/CookieConsent';
 import { fetchAPI } from './lib/strapi';
 
@@ -136,6 +137,7 @@ export default function App() {
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
 
       <Footer cms={cms.footer} />

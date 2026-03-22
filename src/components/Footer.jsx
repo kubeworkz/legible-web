@@ -2,6 +2,7 @@ const DEFAULT_LINKS = [
   { label: 'Docs', href: 'https://docs.legiblequery.ai' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
   { label: 'Privacy', href: '/privacy' },
   { label: 'Terms', href: '/terms' },
 ];
