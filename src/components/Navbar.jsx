@@ -13,6 +13,7 @@ export default function Navbar({ onCTAClick, cms, isBlog }) {
   const links = cms?.links ?? DEFAULT_LINKS;
   const ctaLabel = cms?.ctaLabel ?? 'Start free →';
 
+  const location = useLocation();
   const [active, setActive] = useState('');
 
   useEffect(() => {
@@ -48,6 +49,9 @@ export default function Navbar({ onCTAClick, cms, isBlog }) {
         ))}
         <li>
           <Link to="/blog" style={{ color: isBlog ? 'var(--teal)' : '' }}>Blog</Link>
+        </li>
+        <li>
+          <Link to="/marketplace" style={{ color: location.pathname === '/marketplace' ? 'var(--teal)' : '' }}>Skills</Link>
         </li>
         <li>
           <a href="/legible-security.html">On-Premise</a>

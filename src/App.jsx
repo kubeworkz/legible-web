@@ -15,6 +15,7 @@ import BlogPost from './components/BlogPost';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
 import Contact from './components/Contact';
+import Marketplace from './components/Marketplace';
 import CookieConsent from './components/CookieConsent';
 import { fetchAPI } from './lib/strapi';
 
@@ -138,6 +139,7 @@ export default function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/marketplace" element={<Marketplace />} />
       </Routes>
 
       <Footer cms={cms.footer} />
