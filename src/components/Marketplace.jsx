@@ -13,8 +13,8 @@ const DEFAULT_SKILLS = [
 
 export default function Marketplace() {
   useHead({
-    title: 'Claude Skills Marketplace — Legible',
-    description: 'Browse Claude skills for every database Legible connects to. Copy prompts for PostgreSQL, MySQL, BigQuery, Snowflake, ClickHouse, and more.',
+    title: 'Claude DB Skills Marketplace — Legible',
+    description: 'Browse Claude DB skills for every database Legible connects to. Copy prompts for PostgreSQL, MySQL, BigQuery, Snowflake, ClickHouse, and more.',
   });
 
   const { data: skills } = useStrapiData('/skills?sort=sortOrder:asc&pagination[pageSize]=100', DEFAULT_SKILLS);
