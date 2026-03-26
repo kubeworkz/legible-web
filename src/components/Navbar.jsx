@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const DEFAULT_LINKS = [
-  { label: 'How it works', href: '#how' },
+  { label: 'Skills Resources', href: '/skills-resources', isRoute: true },
   { label: 'Features', href: '#features' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Customers', href: '#proof' },
@@ -37,21 +37,27 @@ export default function Navbar({ onCTAClick, cms, isBlog }) {
         {logoText}
       </Link>
       <ul className="nav-links">
-        {!isBlog && links.map(({ href, label }) => (
+        {!isBlog && links.map(({ href, label, isRoute }) => (
           <li key={href}>
-            <a
-              href={href}
-              style={{ color: active === href.slice(1) ? 'var(--teal)' : '' }}
-            >
-              {label}
-            </a>
+            {isRoute ? (
+              <Link
+                to={href}
+                style={{ color: location.pathname === href ? 'var(--teal)' : '' }}
+              >
+                {label}
+              </Link>
+            ) : (
+              <a
+                href={href}
+                style={{ color: active === href.slice(1) ? 'var(--teal)' : '' }}
+              >
+                {label}
+              </a>
+            )}
           </li>
         ))}
         <li>
           <Link to="/blog" style={{ color: isBlog ? 'var(--teal)' : '' }}>Blog</Link>
-        </li>
-        <li>
-          <Link to="/marketplace" style={{ color: location.pathname === '/marketplace' ? 'var(--teal)' : '' }}>Skills</Link>
         </li>
         <li>
           <a href="/legible-security.html">On-Premise</a>
