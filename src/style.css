@@ -2023,7 +2023,7 @@
     }
 
     .sr-section {
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
 
     .sr-section-heading {
@@ -2031,8 +2031,8 @@
       font-size: 1.4rem;
       font-weight: 600;
       color: var(--white);
-      margin-bottom: 24px;
-      padding-bottom: 12px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--white-border);
     }
 
