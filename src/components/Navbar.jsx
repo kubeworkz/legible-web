@@ -66,9 +66,18 @@ export default function Navbar({ onCTAClick, cms, isBlog }) {
           <a href="https://docs.legiblequery.ai" target="_blank" rel="noopener noreferrer">Docs</a>
         </li>
       </ul>
-      <button className="nav-cta" onClick={() => onCTAClick('nav')}>
-        {ctaLabel}
-      </button>
+      <div className="nav-actions">
+        <a
+          className="nav-download"
+          href="/legible-cli/legible"
+          download
+        >
+          Download Legible Cli
+        </a>
+        <button className="nav-cta" onClick={() => onCTAClick('nav')}>
+          {ctaLabel}
+        </button>
+      </div>
     </nav>
   );
 }
