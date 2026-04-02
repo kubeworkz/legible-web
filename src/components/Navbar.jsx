@@ -37,6 +37,11 @@ export default function Navbar({ onCTAClick, cms, isBlog }) {
         {logoText}
       </Link>
       <ul className="nav-links">
+        {isBlog && (
+          <li>
+            <Link to="/">← Back to Home</Link>
+          </li>
+        )}
         {!isBlog && links.map(({ href, label, isRoute }) => (
           <li key={href}>
             {isRoute ? (
