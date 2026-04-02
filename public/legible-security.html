@@ -95,7 +95,7 @@
       50%      { opacity:0.6; transform:scale(0.85); }
     }
 
-    .nav-links { display:flex; gap:36px; align-items:center; list-style:none; }
+    .nav-links { display:flex; gap:36px; align-items:center; list-style:none; position:absolute; left:50%; transform:translateX(-50%); }
     .nav-links a {
       font-family: var(--mono); font-size: 13px;
       color: var(--white-dim); text-decoration: none;
@@ -112,6 +112,21 @@
     }
     .nav-cta:hover {
       background: var(--teal); color: var(--ink);
+      box-shadow: 0 0 24px rgba(0,212,184,0.35);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+
+    .nav-download {
+      font-family: var(--mono); font-size: 13px; font-weight: 500;
+      letter-spacing: 0.06em; padding: 10px 22px;
+      background: var(--teal); color: var(--ink);
+      border: 1px solid var(--teal); border-radius: 3px;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .nav-download:hover {
+      background: transparent; color: var(--teal);
       box-shadow: 0 0 24px rgba(0,212,184,0.35);
     }
 
@@ -840,7 +855,10 @@
       <li><a href="#deploy">Deployment</a></li>
       <li><a href="/">← Back to home</a></li>
     </ul>
-    <a href="mailto:enterprise@legiblequery.ai" class="nav-cta">Talk to enterprise →</a>
+    <div class="nav-actions">
+      <a class="nav-download" href="/legible-cli/legible" download>Download Legible Cli</a>
+      <a class="nav-cta" href="https://legible.legiblequery.ai">Start free →</a>
+    </div>
   </nav>
 
   <!-- ══════════════════════════════════════════════════════════ -->
@@ -865,7 +883,6 @@
     </p>
 
     <div class="hero-actions fade-up">
-      <a href="mailto:enterprise@legiblequery.ai" class="btn-primary">Book an architecture call →</a>
       <a href="#architecture" class="btn-outline">See how it works</a>
     </div>
 
