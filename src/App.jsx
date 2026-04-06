@@ -19,6 +19,7 @@ import Marketplace from './components/Marketplace';
 import SkillsResources from './components/SkillsResources';
 import CookieConsent from './components/CookieConsent';
 import NewFeatures from './components/NewFeatures';
+import AgentBuilder from './components/AgentBuilder';
 import { fetchAPI } from './lib/strapi';
 
 // Set up the global reveal observer once the app mounts.
@@ -131,6 +132,7 @@ export default function App() {
             <Logos cms={cms.databases} />
             <HowItWorks cms={cms.steps} />
             <Features cms={cms.features} />
+            <AgentBuilder />
             <NewFeatures />
             <Pricing onCTAClick={openModal} cms={cms.plans} />
             <Proof cms={cms.testimonials} />
