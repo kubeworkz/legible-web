@@ -73,9 +73,9 @@ export default function AgentBuilder() {
               <span className="ab-ok">✓</span> Deployed — API live at <span className="ab-dim">/api/v1/agents/5/sessions</span>{'\n'}
               {'\n'}
               <span className="ab-prompt">$</span> legible ab chat <span className="ab-val">5</span>{'\n'}
-              <span className="ab-dim">╭──────────────────────────────────────╮</span>{'\n'}
+              <span className="ab-dim">╭────────────────────────────────────────╮</span>{'\n'}
               <span className="ab-dim">│ Chat with "Revenue Analyst" (v1)     │</span>{'\n'}
-              <span className="ab-dim">╰──────────────────────────────────────╯</span>{'\n'}
+              <span className="ab-dim">╰────────────────────────────────────────╯</span>{'\n'}
               <span className="ab-you">you&gt;</span> What was total revenue last quarter?{'\n'}
               {'  '}<span className="ab-dim">⚙ Tool: run_sql</span>{'\n'}
               <span className="ab-agent">agent&gt;</span> Last quarter's total revenue was <span className="ab-val">$2,450,000</span>.
