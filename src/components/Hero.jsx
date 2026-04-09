@@ -5,10 +5,10 @@ const DEFAULT_STATS = [
 ];
 
 export default function Hero({ onCTAClick, cms }) {
-  const eyebrow = cms?.eyebrow ?? 'Natural Language Data Intelligence';
+  const eyebrow = cms?.eyebrow ?? 'Data Teams Redefined';
   const title = cms?.title ?? 'Ask your data anything.\nGet answers you can trust.';
   const titleHighlight = cms?.titleHighlight ?? 'answers you can trust.';
-  const subtitle = cms?.subtitle ?? "Legible turns plain English into verified SQL across your databases — no guesswork, no black boxes. Built for teams where accuracy isn't optional.";
+  const subtitle = cms?.subtitle ?? "Legible turns plain English into verified SQL across your databases — no guesswork, no black boxes. Designed by seasoned data professionals who can ask the right questions.";
   const primaryCta = cms?.primaryCtaLabel ?? 'Start for free';
   const secondaryCta = cms?.secondaryCtaLabel ?? 'See how it works';
   const stats = cms?.stats ?? DEFAULT_STATS;

@@ -5,7 +5,7 @@ export default function AgentBuilder() {
         <div className="ab-content" data-reveal>
           <span className="ab-badge">NEW FEATURE</span>
           <h2 className="section-title">
-            Build custom AI agents.<br />Deploy in a secure sandbox.
+            Dig Deeper. Build custom AI agents.<br />Deploy in a secure sandbox.
           </h2>
           <p className="ab-desc">
             Agent Builder lets you create versioned, deployable AI agents powered by your semantic layer — each running inside a kernel-isolated sandbox. Define behavior with a system prompt, choose your model, publish immutable versions, and expose agents via REST API. All from the CLI or the web UI.
